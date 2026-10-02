@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjetoViagemOnboarding.Views.ViagemPage"
+             xmlns:viewsmodels="clr-namespace:ProjetoViagemOnboarding.VIewModels"
+             xmlns:models="clr-namespace:ProjetoViagemOnboarding.Models"
+             x:DataType="viewsmodels:ViagemViewModel"
+             BackgroundColor="#FFF"
+             Shell.NavBarIsVisible="False"
+             Title="ViagemPage">
+
+
+    <Grid RowDefinitions="*, Auto, Auto" Padding="5, 10">
+        <CarouselView Grid.Row="0" 
+                     Position="{Binding Posicao}"
+                     ItemsSource="{Binding Itens}"
+                     Loop="False"
+                     IndicatorView="Indicador"
+                     >
+
+            <CarouselView.ItemTemplate>
+                <DataTemplate x:DataType="models:ViagemItem">
+                    <VerticalStackLayout VerticalOptions="Center"
+                                    Spacing="20"
+                                    >
+                     
+                        <Image Source="{Binding ImagemUrl}"
+                          Aspect="AspectFit"
+                          HeightRequest="350"/>
+                           
+                        <Label 
+                          Text="{Binding Titulo}"
+                          FontSize="28" 
+                          HorizontalTextAlignment="Center"
+                          TextColor="#333"/>
+                        
+                        <Label Text="{Binding Descricao}"
+                          FontSize="18"
+                          TextColor="#333"
+                          HorizontalTextAlignment="Center"/>
+
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <IndicatorView x:Name="Indicador"
+                   Grid.Row="1"
+                   IndicatorColor="LightPink"
+                   IndicatorSize="14"
+                   HorizontalOptions="Center"
+                   SelectedIndicatorColor="#FF1568"        
+                   />
+        <Grid Grid.Row="2"
+          ColumnDefinitions="*,*" 
+          ColumnSpacing="15" >
+
+            <Button Grid.Column="0"
+                Text="Get started"
+                Background="#FF1568"/>
+
+            <Button Grid.Column="1"
+                Command="{Binding ProximoCommand}"
+                Text="Next"
+                BackgroundColor="#4EA717"
+                IsVisible="{Binding ExibirBotao}"
+                />
+
+        </Grid>
+    </Grid>
+
+</ContentPage>
